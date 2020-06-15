@@ -1,0 +1,35 @@
+﻿<Window x:Class="Real_3D_Model_Viewer.MainWindow"
+        xmlns:hx="http://helix-toolkit.org/wpf/SharpDX"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Real_3D_Model_Viewer"
+        mc:Ignorable="d"
+        Title="3D Model Viewer" Height="600" Width="900" ResizeMode="NoResize">
+
+    <Grid Margin="10,10,13.6,6.4" RenderTransformOrigin="0.113,0.781">
+        <hx:Viewport3DX Camera="{Binding Camera}" EffectsManager="{Binding EffectsManager}" Margin="10,99,10,10">
+            <hx:DirectionalLight3D Direction="{Binding Camera.LookDirection}" Color="#D6D6D6" />
+            <hx:Element3DPresenter Content="{Binding GroupModel}"/>
+            <hx:Viewport3DX.InputBindings>
+                <KeyBinding Key="B" Command="hx:ViewportCommands.BackView" />
+                <KeyBinding Key="F" Command="hx:ViewportCommands.FrontView" />
+                <KeyBinding Key="T" Command="hx:ViewportCommands.TopView" />
+                <KeyBinding Key="D" Command="hx:ViewportCommands.BottomView" />
+                <KeyBinding Key="L" Command="hx:ViewportCommands.LeftView" />
+                <KeyBinding Key="R" Command="hx:ViewportCommands.RightView" />
+                <KeyBinding Command="hx:ViewportCommands.ZoomExtents" Gesture="Control+E" />
+                <MouseBinding Command="hx:ViewportCommands.Rotate" Gesture="RightClick" />
+                <MouseBinding Command="hx:ViewportCommands.Zoom" Gesture="MiddleClick" />
+                <MouseBinding Command="hx:ViewportCommands.Pan" Gesture="LeftClick" />
+            </hx:Viewport3DX.InputBindings>
+        </hx:Viewport3DX>
+        <Button x:Name="OpenModel_Button" Content="Загрузить модель" HorizontalAlignment="Left" Margin="10,29,0,0" VerticalAlignment="Top" Width="140" Click="OpenModel_Button_Click" Height="50" FontFamily="Times New Roman" FontSize="18"/>
+        <CheckBox Margin="340,44,342,480" IsChecked="{Binding EnableAnimation}" FontFamily="Times New Roman" FontSize="18" >Включить анимацию</CheckBox>
+        <ComboBox ItemsSource="{Binding Animations}" SelectedItem="{Binding SelectedAnimation}" DisplayMemberPath="Name" Margin="554,42,76,480" FontFamily="Times New Roman" FontSize="18" />
+        <Button x:Name="ClearScene_Button" Content="Очистить сцену" HorizontalAlignment="Left" Margin="173,29,0,0" VerticalAlignment="Top" Width="140" Height="50" Click="ClearScene_Button_Click" FontFamily="Times New Roman" FontSize="18"/>
+        <Label Content="Список анимаций" HorizontalAlignment="Left" Margin="554,7,0,0" VerticalAlignment="Top" IsEnabled="False" Width="184" FontFamily="Times New Roman" FontSize="18"/>
+        <Button x:Name="QuestButton" Content="?" HorizontalAlignment="Left" Margin="833,7,0,0" VerticalAlignment="Top" Width="27" FontFamily="Times New Roman" FontSize="18" FontWeight="Bold" Height="30" Click="QuestButton_Click"/>
+    </Grid>
+</Window>
